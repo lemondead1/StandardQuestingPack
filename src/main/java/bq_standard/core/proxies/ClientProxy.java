@@ -17,96 +17,81 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ClientProxy extends CommonProxy
-{
-	@Override
-	public boolean isClient()
-	{
-		return true;
-	}
-	
-	@Override
-	public void registerHandlers()
-	{
-		super.registerHandlers();
-	}
-	
-	@Override
-	public void registerExpansion()
-	{
-		super.registerExpansion();
-		
-		QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(NativeFileImporter.INSTANCE);
-		
-		QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(HQMQuestImporter.INSTANCE);
-		QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(HQMBagImporter.INSTANCE);
-		
-		QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(FTBQQuestImporter.INSTANCE);
-        QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(AdvImporter.INSTANCE);
-		
-        BQSTextures.registerTextures();
-	}
-	
-	@Override
-	public void registerRenderers()
-	{
-		super.registerRenderers();
-		
-		registerItemModelSubtypes(BQ_Standard.lootChest, 0, 104, BQ_Standard.lootChest.getRegistryName().toString());
-	}
-	
-	@SideOnly(Side.CLIENT)
-	private void registerBlockModel(Block block)
-	{
-		registerBlockModel(block, 0, block.getRegistryName().toString());
-	}
-	
-	@SideOnly(Side.CLIENT)
-	private void registerBlockModel(Block block, int meta, String name)
-	{
-		Item item = Item.getItemFromBlock(block);
-		ModelResourceLocation model = new ModelResourceLocation(name, "inventory");
-		
-		if(!name.equals(item.getRegistryName()))
-		{
-		    ModelBakery.registerItemVariants(item, model);
-		}
+public class ClientProxy extends CommonProxy {
+  @Override
+  public boolean isClient() {
+    return true;
+  }
 
-		ModelLoader.setCustomModelResourceLocation(item, meta, model);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	private void registerItemModelSubtypes(Item item, int metaStart, int metaEnd, String name)
-	{
-		if(metaStart > metaEnd)
-		{
-			int tmp = metaStart;
-			metaStart = metaEnd;
-			metaEnd = tmp;
-		}
-		
-		for(int m = metaStart; m <= metaEnd; m++)
-		{
-			registerItemModel(item, m, name);
-		}
-	}
-	
-	@SideOnly(Side.CLIENT)
-	private void registerItemModel(Item item)
-	{
-		registerItemModel(item, 0, item.getRegistryName().toString());
-	}
-	
-	@SideOnly(Side.CLIENT)
-	private void registerItemModel(Item item, int meta, String name)
-	{
-		ModelResourceLocation model = new ModelResourceLocation(name, "inventory");
-		
-		if(!name.equals(item.getRegistryName().toString()))
-		{
-		    ModelBakery.registerItemVariants(item, model);
-		}
-		
-		ModelLoader.setCustomModelResourceLocation(item, meta, model);
-	}
+  @Override
+  public void registerHandlers() {
+    super.registerHandlers();
+  }
+
+  @Override
+  public void registerExpansion() {
+    super.registerExpansion();
+
+    QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(NativeFileImporter.INSTANCE);
+
+    QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(HQMQuestImporter.INSTANCE);
+    QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(HQMBagImporter.INSTANCE);
+
+    QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(FTBQQuestImporter.INSTANCE);
+    QuestingAPI.getAPI(ApiReference.IMPORT_REG).registerImporter(AdvImporter.INSTANCE);
+
+    BQSTextures.registerTextures();
+  }
+
+  @Override
+  public void registerRenderers() {
+    super.registerRenderers();
+
+    registerItemModelSubtypes(BQ_Standard.lootChest, 0, 104, BQ_Standard.lootChest.getRegistryName().toString());
+  }
+
+  @SideOnly(Side.CLIENT)
+  private void registerBlockModel(Block block) {
+    registerBlockModel(block, 0, block.getRegistryName().toString());
+  }
+
+  @SideOnly(Side.CLIENT)
+  private void registerBlockModel(Block block, int meta, String name) {
+    Item item = Item.getItemFromBlock(block);
+    ModelResourceLocation model = new ModelResourceLocation(name, "inventory");
+
+    item.getRegistryName();
+    ModelBakery.registerItemVariants(item, model);
+
+    ModelLoader.setCustomModelResourceLocation(item, meta, model);
+  }
+
+  @SideOnly(Side.CLIENT)
+  private void registerItemModelSubtypes(Item item, int metaStart, int metaEnd, String name) {
+    if (metaStart > metaEnd) {
+      int tmp = metaStart;
+      metaStart = metaEnd;
+      metaEnd = tmp;
+    }
+
+    for (int m = metaStart; m <= metaEnd; m++) {
+      registerItemModel(item, m, name);
+    }
+  }
+
+  @SideOnly(Side.CLIENT)
+  private void registerItemModel(Item item) {
+    registerItemModel(item, 0, item.getRegistryName().toString());
+  }
+
+  @SideOnly(Side.CLIENT)
+  private void registerItemModel(Item item, int meta, String name) {
+    ModelResourceLocation model = new ModelResourceLocation(name, "inventory");
+
+    if (!name.equals(item.getRegistryName().toString())) {
+      ModelBakery.registerItemVariants(item, model);
+    }
+
+    ModelLoader.setCustomModelResourceLocation(item, meta, model);
+  }
 }

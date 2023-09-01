@@ -7,28 +7,24 @@ import bq_standard.rewards.RewardRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
-public class FactoryRewardRecipe implements IFactoryData<IReward, NBTTagCompound>
-{
-	public static final FactoryRewardRecipe INSTANCE = new FactoryRewardRecipe();
-	
-	@Override
-	public ResourceLocation getRegistryName()
-	{
-		return new ResourceLocation(BQ_Standard.MODID, "recipe");
-	}
+public class FactoryRewardRecipe implements IFactoryData<IReward, NBTTagCompound> {
+  public static final FactoryRewardRecipe INSTANCE = new FactoryRewardRecipe();
 
-	@Override
-	public RewardRecipe createNew()
-	{
-		return new RewardRecipe();
-	}
+  @Override
+  public ResourceLocation getRegistryName() {
+    return new ResourceLocation(BQ_Standard.MODID, "recipe");
+  }
 
-	@Override
-	public RewardRecipe loadFromData(NBTTagCompound json)
-	{
-		RewardRecipe reward = new RewardRecipe();
-		reward.readFromNBT(json);
-		return reward;
-	}
-	
+  @Override
+  public RewardRecipe createNew() {
+    return new RewardRecipe();
+  }
+
+  @Override
+  public RewardRecipe loadFromData(NBTTagCompound json) {
+    RewardRecipe reward = new RewardRecipe();
+    reward.readFromNBT(json);
+    return reward;
+  }
+
 }

@@ -20,32 +20,34 @@ import net.minecraft.init.Items;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.util.vector.Vector4f;
 
-public class PanelTaskXP extends CanvasEmpty
-{
-    private final TaskXP task;
-    
-    public PanelTaskXP(IGuiRect rect, TaskXP task)
-    {
-        super(rect);
-        this.task = task;
-    }
-    
-    @Override
-    public void initPanel()
-    {
-        super.initPanel();
-        
-        this.addPanel(new PanelGeneric(new GuiTransform(GuiAlign.MID_CENTER, -16, -32, 32, 32, 0), new ItemTexture(new BigItemStack(Items.EXPERIENCE_BOTTLE))));
-        
-		long xp = task.getUsersProgress(QuestingAPI.getQuestingUUID(Minecraft.getMinecraft().player));
-		xp = !task.levels? xp : XPHelper.getXPLevel(xp);
-		final float xpPercent = (float)((double)xp/(double)task.amount);
-        
-        PanelHBarFill fillBar = new PanelHBarFill(new GuiTransform(new Vector4f(0.25F, 0.5F, 0.75F, 0.5F), new GuiPadding(0, 0, 0, -16), 0));
-        fillBar.setFillColor(new GuiColorStatic(0xFF00FF00));
-        fillBar.setFillDriver(new ValueFuncIO<>(() -> xpPercent));
-        this.addPanel(fillBar);
-        
-        this.addPanel(new PanelTextBox(new GuiTransform(new Vector4f(0.25F, 0.5F, 0.75F, 0.5F), new GuiPadding(0, 4, 0, -16), -1), TextFormatting.BOLD + "" + xp + "/" + task.amount + (task.levels ? "L" : "XP")).setAlignment(1));
-    }
+public class PanelTaskXP extends CanvasEmpty {
+  private final TaskXP task;
+
+  public PanelTaskXP(IGuiRect rect, TaskXP task) {
+    super(rect);
+    this.task = task;
+  }
+
+  @Override
+  public void initPanel() {
+    super.initPanel();
+
+    this.addPanel(new PanelGeneric(new GuiTransform(GuiAlign.MID_CENTER, -16, -32, 32, 32, 0),
+                                   new ItemTexture(new BigItemStack(Items.EXPERIENCE_BOTTLE))));
+
+    long xp = task.getUsersProgress(QuestingAPI.getQuestingUUID(Minecraft.getMinecraft().player));
+    xp = !task.levels ? xp : XPHelper.getXPLevel(xp);
+    final float xpPercent = (float) ((double) xp / (double) task.amount);
+
+    PanelHBarFill fillBar =
+        new PanelHBarFill(new GuiTransform(new Vector4f(0.25F, 0.5F, 0.75F, 0.5F), new GuiPadding(0, 0, 0, -16), 0));
+    fillBar.setFillColor(new GuiColorStatic(0xFF00FF00));
+    fillBar.setFillDriver(new ValueFuncIO<>(() -> xpPercent));
+    this.addPanel(fillBar);
+
+    this.addPanel(
+        new PanelTextBox(new GuiTransform(new Vector4f(0.25F, 0.5F, 0.75F, 0.5F), new GuiPadding(0, 4, 0, -16), -1),
+                         TextFormatting.BOLD + "" + xp + "/" + task.amount + (task.levels ? "L" : "XP")).setAlignment(
+            1));
+  }
 }

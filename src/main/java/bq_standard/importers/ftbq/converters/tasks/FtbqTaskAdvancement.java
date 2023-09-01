@@ -7,17 +7,15 @@ import bq_standard.tasks.TaskTrigger;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class FtbqTaskAdvancement
-{
-    public ITask[] converTask(NBTTagCompound tag)
-    {
-        TaskTrigger task = new TaskTrigger();
-        
-        task.setTriggerID(tag.getString("advancement"));
-        task.setCriteriaJson(tag.getString("criterion"));
-    
-        FTBQQuestImporter.provideQuestIcon(new BigItemStack(Items.WHEAT));
-        
-        return new ITask[]{task};
-    }
+public class FtbqTaskAdvancement {
+  public ITask[] converTask(NBTTagCompound tag) {
+    TaskTrigger task = new TaskTrigger();
+
+    task.setTriggerID(tag.getString("advancement"));
+    task.setCriteriaJson(tag.getString("criterion"));
+
+    FTBQQuestImporter.provideQuestIcon(new BigItemStack(Items.WHEAT));
+
+    return new ITask[] { task };
+  }
 }

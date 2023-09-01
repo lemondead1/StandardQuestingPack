@@ -15,58 +15,54 @@ import bq_standard.tasks.factory.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
-public class CommonProxy
-{
-	public boolean isClient()
-	{
-		return false;
-	}
-	
-	public void registerHandlers()
-	{
-		MinecraftForge.EVENT_BUS.register(new LootRegistry());
-		MinecraftForge.EVENT_BUS.register(new EventHandler());
-	}
-	
-	public void registerRenderers()
-	{
-	}
-	
-	public void registerExpansion()
-	{
-		IRegistry<IFactoryData<ITask, NBTTagCompound>, ITask> taskReg = QuestingAPI.getAPI(ApiReference.TASK_REG);
-		taskReg.register(FactoryTaskBlockBreak.INSTANCE);
-		taskReg.register(FactoryTaskCheckbox.INSTANCE);
-		taskReg.register(FactoryTaskCrafting.INSTANCE);
-		taskReg.register(FactoryTaskFluid.INSTANCE);
-		taskReg.register(FactoryTaskHunt.INSTANCE);
-		taskReg.register(FactoryTaskLocation.INSTANCE);
-		taskReg.register(FactoryTaskMeeting.INSTANCE);
-		taskReg.register(FactoryTaskRetrieval.INSTANCE);
-		taskReg.register(FactoryTaskScoreboard.INSTANCE);
-		taskReg.register(FactoryTaskXP.INSTANCE);
-		taskReg.register(FactoryTaskAdvancement.INSTANCE);
-		taskReg.register(FactoryTaskTame.INSTANCE);
-		taskReg.register(FactoryTaskInteractItem.INSTANCE);
-		taskReg.register(FactoryTaskInteractEntity.INSTANCE);
-		taskReg.register(FactoryTaskTrigger.INSTANCE);
+public class CommonProxy {
+  public boolean isClient() {
+    return false;
+  }
 
-		IRegistry<IFactoryData<IReward, NBTTagCompound>, IReward> rewardReg = QuestingAPI.getAPI(ApiReference.REWARD_REG);
-		rewardReg.register(FactoryRewardChoice.INSTANCE);
-		rewardReg.register(FactoryRewardCommand.INSTANCE);
-		rewardReg.register(FactoryRewardItem.INSTANCE);
-		rewardReg.register(FactoryRewardScoreboard.INSTANCE);
-		rewardReg.register(FactoryRewardXP.INSTANCE);
-		rewardReg.register(FactoryRewardRecipe.INSTANCE);
-		
-		NetLootSync.registerHandler();
-		NetLootClaim.registerHandler();
-		NetTaskCheckbox.registerHandler();
-		NetScoreSync.registerHandler();
-		NetRewardChoice.registerHandler();
-		NetLootImport.registerHandler();
-		NetTaskInteract.registerHandler();
-		
-		BQ_Standard.lootChest.setCreativeTab(QuestingAPI.getAPI(ApiReference.CREATIVE_TAB));
-	}
+  public void registerHandlers() {
+    MinecraftForge.EVENT_BUS.register(new LootRegistry());
+    MinecraftForge.EVENT_BUS.register(new EventHandler());
+  }
+
+  public void registerRenderers() {
+  }
+
+  public void registerExpansion() {
+    IRegistry<IFactoryData<ITask, NBTTagCompound>, ITask> taskReg = QuestingAPI.getAPI(ApiReference.TASK_REG);
+    taskReg.register(FactoryTaskBlockBreak.INSTANCE);
+    taskReg.register(FactoryTaskCheckbox.INSTANCE);
+    taskReg.register(FactoryTaskCrafting.INSTANCE);
+    taskReg.register(FactoryTaskEnergy.INSTANCE);
+    taskReg.register(FactoryTaskFluid.INSTANCE);
+    taskReg.register(FactoryTaskHunt.INSTANCE);
+    taskReg.register(FactoryTaskLocation.INSTANCE);
+    taskReg.register(FactoryTaskMeeting.INSTANCE);
+    taskReg.register(FactoryTaskRetrieval.INSTANCE);
+    taskReg.register(FactoryTaskScoreboard.INSTANCE);
+    taskReg.register(FactoryTaskXP.INSTANCE);
+    taskReg.register(FactoryTaskAdvancement.INSTANCE);
+    taskReg.register(FactoryTaskTame.INSTANCE);
+    taskReg.register(FactoryTaskInteractItem.INSTANCE);
+    taskReg.register(FactoryTaskInteractEntity.INSTANCE);
+    taskReg.register(FactoryTaskTrigger.INSTANCE);
+
+    IRegistry<IFactoryData<IReward, NBTTagCompound>, IReward> rewardReg = QuestingAPI.getAPI(ApiReference.REWARD_REG);
+    rewardReg.register(FactoryRewardChoice.INSTANCE);
+    rewardReg.register(FactoryRewardCommand.INSTANCE);
+    rewardReg.register(FactoryRewardItem.INSTANCE);
+    rewardReg.register(FactoryRewardScoreboard.INSTANCE);
+    rewardReg.register(FactoryRewardXP.INSTANCE);
+    rewardReg.register(FactoryRewardRecipe.INSTANCE);
+
+    NetLootSync.registerHandler();
+    NetLootClaim.registerHandler();
+    NetTaskCheckbox.registerHandler();
+    NetScoreSync.registerHandler();
+    NetRewardChoice.registerHandler();
+    NetLootImport.registerHandler();
+    NetTaskInteract.registerHandler();
+
+    BQ_Standard.lootChest.setCreativeTab(QuestingAPI.getAPI(ApiReference.CREATIVE_TAB));
+  }
 }

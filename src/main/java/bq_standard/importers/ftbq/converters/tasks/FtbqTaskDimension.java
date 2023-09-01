@@ -8,22 +8,20 @@ import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
 
-public class FtbqTaskDimension
-{
-    public ITask[] converTask(NBTTagCompound tag)
-    {
-        TaskLocation task = new TaskLocation();
-        
-        task.range = -1;
-        task.dim = tag.getInteger("dim");
-        task.x = 0;
-        task.y = 0;
-        task.z = 0;
-        task.visible = true;
-        task.name = tag.hasKey("title", 8) ? tag.getString("title") : DimensionType.getById(task.dim).getName();
-    
-        FTBQQuestImporter.provideQuestIcon(new BigItemStack(Items.COMPASS));
-        
-        return new ITask[]{task};
-    }
+public class FtbqTaskDimension {
+  public ITask[] converTask(NBTTagCompound tag) {
+    TaskLocation task = new TaskLocation();
+
+    task.range = -1;
+    task.dim = tag.getInteger("dim");
+    task.x = 0;
+    task.y = 0;
+    task.z = 0;
+    task.visible = true;
+    task.name = tag.hasKey("title", 8) ? tag.getString("title") : DimensionType.getById(task.dim).getName();
+
+    FTBQQuestImporter.provideQuestIcon(new BigItemStack(Items.COMPASS));
+
+    return new ITask[] { task };
+  }
 }
